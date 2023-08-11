@@ -6,8 +6,8 @@ export default function GoogleButton({
     onClick: () => void
 }) {
     return (
-        <div className={css.googleButton} onClick={onClick}>
-            <div className={css.googleIcon}>
+        <div className={css.button} onClick={onClick}>
+            <div className={css.icon}>
                 <svg width="100%" height="100%" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <title>btn_google_light_normal_ios</title>
                     <desc>Created with Sketch.</desc>
