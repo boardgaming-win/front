@@ -1,10 +1,11 @@
 import Layout from '@/layout/default';
 import css from './index.module.css';
 import { Card, Grid } from '@nextui-org/react';
-import router from 'next/router';
 import { User } from '@/types';
 import { GetServerSidePropsContext } from 'next';
-import whoami from '@/functions/auth/serverProps/whoami';
+import whoami from '@/functions/serverProps/auth/whoami';
+import Footer from '@/layout/footer/default';
+import Header from '@/layout/header/default';
 
 export default function Home({
   user
@@ -12,24 +13,24 @@ export default function Home({
   user: User
 }) {
   return (
-    <Layout user={user}>
+    <Layout
+      header={<Header user={user}/>}
+      footer={<Footer />}>
       <Grid.Container gap={2} justify="center" css={{ width: "100%", margin: 0 }}>
         <Grid xs={12} sm={6}>
           <Card
             isPressable
             isHoverable
-            variant="bordered"
-            onClick={() => router.push("/gomoku/online")}>
-            <span className={css.link}>Gomoku Online</span>
+            variant="bordered">
+            <a className={css.link} href="/gomoku/online">Gomoku Online</a>
           </Card>
         </Grid>
         <Grid xs={12} sm={6}>
           <Card
             isPressable
             isHoverable
-            variant="bordered"
-            onClick={() => router.push("/gomoku/ai")}>
-            <span className={css.link}>Gomoku AI</span>
+            variant="bordered">
+            <a className={css.link} href="/gomoku/ai">Gomoku AI</a>
           </Card>
         </Grid>
       </Grid.Container>

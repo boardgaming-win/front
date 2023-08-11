@@ -1,4 +1,5 @@
 import { BindingsChangeTarget } from "@nextui-org/react/types/use-input/use-input";
+import { UserInfo } from "os";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 enum Target {
@@ -23,7 +24,8 @@ enum WinState {
 
 enum UserRole {
     USER = 'USER',
-    ADMIN = 'ADMIN'
+    ADMIN = 'ADMIN',
+    GUEST = 'GUEST'
 };
 
 enum GomokuRule {
@@ -40,7 +42,7 @@ type User = {
     id: string,
     email: string,
     role?: UserRole,
-    image: string | null;
+    imageFileUrl: string | null;
 }
 
 type GameUserHistory = {
@@ -77,6 +79,12 @@ enum GomokuGameResult {
     BLACK_WIN = 'BLACK_WIN',
     WHITE_WIN = 'WHITE_WIN',
     DRAW = 'DRAW'
+};
+
+enum GomokuUserResult {
+    WIN = "WIN",
+    DRAW = "DRAW",
+    LOSE = "LOSE"
 };
 
 enum GomokuGameResultReason {
@@ -139,6 +147,34 @@ enum PasswordValidityStatus {
     VALID = 'VALID'
 }
 
+type GameHistory = {
+    id: number,
+    opponent: String,
+    userColor: GomokuGameTurn,
+    result: GomokuUserResult,
+    beforeRating: number,
+    afterRating: number
+}
+
+type GameHistoryDetail = {
+    id: number,
+    blackPlayer: User,
+    blackGameUserHistory: GameUserHistory,
+    blackPlayerBeforeRating: number,
+    blackPlayerAfterRating: number,
+    whitePlayer: User,
+    whiteGameUserHistory: GameUserHistory,
+    whitePlayerBeforeRating: number,
+    whitePlayerAfterRating: number,
+    gameResult: GomokuGameResult,
+    gameResultReason: GomokuGameResultReason,
+    moveStack: Array<number>
+}
+
+enum OnlineNavTarget {
+    PLAY = "PLAY",
+    NOTATION = "NOTATION"
+}
 export {
     Target,
     Color,
@@ -154,13 +190,17 @@ export {
     GomokuGameStatus,
     GomokuGameTurn,
     GomokuGameResult,
-    GomokuGameResultReason
+    GomokuGameResultReason,
+    OnlineNavTarget,
+    GomokuUserResult
 };
 export type {
     User,
     Room,
     RoomDetail,
     InputType,
-    GameUserHistory
+    GameUserHistory,
+    GameHistory,
+    GameHistoryDetail
 };
 

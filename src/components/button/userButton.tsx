@@ -1,11 +1,12 @@
 import { Key, ReactElement } from "react";
 import css from './userButton.module.css';
-import { User } from "@/types";
+import { User, UserRole } from "@/types";
 import { Dropdown, Text } from "@nextui-org/react";
 import Swal from "sweetalert2";
 import Router from "next/router";
 import { api } from "@/config/apiConfig";
 import ImageIcon from "@/components/common/imageIcon";
+import React from "react";
 
 async function signout() {
     Swal.fire({
@@ -47,40 +48,67 @@ export default function UserButton({
 }: {
     user: User
 }): ReactElement {
-    return (
-        <Dropdown placement="bottom-left">
-            <Dropdown.Trigger>
-                <div
-                    id="user button"
-                    className={css.imageIcon}>
-                    <ImageIcon user={user}/>
-                </div>
-            </Dropdown.Trigger>
-            <Dropdown.Menu color="primary" aria-label="User Actions" disabledKeys={["profile"]} onAction={dropDownHandler}>
-                <Dropdown.Item key="profile" css={{ height: "$18", color: "black" }}>
-                    <Text b color="inherit" css={{ d: "flex" }}>
-                        Signed in as
-                    </Text>
-                    <Text b color="inherit" css={{ d: "flex" }}>
-                        { user.email }
-                    </Text>
-                </Dropdown.Item>
-                <Dropdown.Item key="settings" withDivider>
-                    <span>Your profile</span>
-                </Dropdown.Item>
-                <Dropdown.Item key="change-password" withDivider>
-                    <span>Change password</span>
-                </Dropdown.Item>
-                {/* <Dropdown.Item key="help_and_feedback" withDivider>
-                    <span>Help & Feedback</span>
-                </Dropdown.Item> */}
-                <Dropdown.Item
-                    key="signout"
-                    color="error"
-                    withDivider>
-                    <span>Sign out</span>
-                </Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>
-    );
+    if (user.role == UserRole.GUEST) {
+        return (
+            <Dropdown placement="bottom-left">
+                <Dropdown.Trigger>
+                    <div
+                        id="user button"
+                        className={css.imageIcon}>
+                        <ImageIcon user={user}/>
+                    </div>
+                </Dropdown.Trigger>
+                <Dropdown.Menu color="primary" aria-label="User Actions" disabledKeys={["profile"]} onAction={dropDownHandler}>
+                    <Dropdown.Item key="profile" css={{ height: "$18", color: "black" }}>
+                        <Text b color="inherit" css={{ d: "flex" }}>
+                            Signed in as
+                        </Text>
+                        <Text b color="inherit" css={{ d: "flex" }}>
+                            { user.email }
+                        </Text>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        key="signout"
+                        color="error"
+                        withDivider>
+                        <span>Sign out</span>
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        );
+    } else {
+        return (
+            <Dropdown placement="bottom-left">
+                <Dropdown.Trigger>
+                    <div
+                        id="user button"
+                        className={css.imageIcon}>
+                        <ImageIcon user={user}/>
+                    </div>
+                </Dropdown.Trigger>
+                <Dropdown.Menu color="primary" aria-label="User Actions" disabledKeys={["profile"]} onAction={dropDownHandler}>
+                    <Dropdown.Item key="profile" css={{ height: "$18", color: "black" }}>
+                        <Text b color="inherit" css={{ d: "flex" }}>
+                            Signed in as
+                        </Text>
+                        <Text b color="inherit" css={{ d: "flex" }}>
+                            { user.email }
+                        </Text>
+                    </Dropdown.Item>
+                    <Dropdown.Item key="settings" withDivider>
+                        <span>Your profile</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item key="change-password" withDivider>
+                        <span>Change password</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        key="signout"
+                        color="error"
+                        withDivider>
+                        <span>Sign out</span>
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        );
+    }
 }

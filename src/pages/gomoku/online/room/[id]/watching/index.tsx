@@ -1,7 +1,7 @@
 import { gomoku_api } from "@/config/apiConfig";
 import { gomoku_ws } from "@/config/socketConfig";
-import whoami from "@/functions/auth/serverProps/whoami";
-import Layout from "@/layout/gomoku/online/gameRoom/watching";
+import whoami from "@/functions/serverProps/auth/whoami";
+import Layout from "@/layout/default";
 import { Color, GameType, GomokuGameStatus, GomokuGameTurn, GomokuRule, RoomDetail, Target, User } from "@/types";
 import { Modal, Row } from "@nextui-org/react";
 import { Frame } from "@stomp/stompjs";
@@ -12,7 +12,8 @@ import Board from '@/components/board/gomoku';
 import { fileOf, foulMoves, rankOf, registerWorker } from "@/functions/gomoku/asm";
 import GameResultForm from "@/components/gameResult/gameResultForm";
 import { boardRows } from "@/config/board";
-import Swal from "sweetalert2";
+import Header from "@/layout/header/gameRoom";
+import Footer from "@/layout/footer/gameWatchingRoom";
 
 async function enterRoomWatching(roomId: number, callback: (roomDetail: RoomDetail) => void) {
     try {
@@ -49,8 +50,6 @@ export default function GomokuOnlineRoomWatching({
           
                 subscribeList.push(`/sub/room/${roomDetail.id}`);
             });
-
-            console.log(gomoku_ws.reconnectDelay);
         });
 
         return () => {
@@ -152,16 +151,13 @@ export default function GomokuOnlineRoomWatching({
             <Modal
                 open={roomDetail.gameStatus == GomokuGameStatus.END}
                 onClose={() => Router.push("/gomoku/online")}
-                width="600px">
+                width="500px">
                 <Modal.Header css={{ fontSize: "2.5vh" }}>Game Result</Modal.Header>
                 <Modal.Body>
                     <GameResultForm roomDetail={roomDetail}/>
                 </Modal.Body>
             </Modal>
-            <Layout
-                user={user}
-                roomDetail={roomDetail}
-                onTurnTimeEnd={onTurnTimeEnd}>
+            <Layout header={<Header outUrl="/gomoku/online"/>} footer={<Footer roomDetail={roomDetail} onTurnTimeEnd={onTurnTimeEnd}/>}>
                 <Row justify="center">
                     <Board
                         boardRows={boardRows}

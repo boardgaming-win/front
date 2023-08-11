@@ -1,7 +1,9 @@
 
 import SignupForm from '@/components/auth/signUpForm';
-import whoami from '@/functions/auth/serverProps/whoami';
+import whoami from '@/functions/serverProps/auth/whoami';
 import Layout from '@/layout/default';
+import Footer from '@/layout/footer/default';
+import Header from '@/layout/header/default';
 import { User } from '@/types';
 import { GetServerSidePropsContext } from 'next';
 
@@ -12,9 +14,8 @@ export default function SignUp({
 }) {
     return (
         <Layout
-            display="flex"
-            justifyContent="center"
-            alignItems="center">
+            header={<Header user={user}/>}
+            footer={<Footer />}>
             <SignupForm />
         </Layout>
     );

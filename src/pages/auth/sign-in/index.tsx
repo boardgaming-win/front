@@ -1,36 +1,21 @@
 import SigninForm from "@/components/auth/signinForm";
-import { api } from "@/config/apiConfig";
-import whoami from "@/functions/auth/serverProps/whoami";
+import whoami from "@/functions/serverProps/auth/whoami";
 import Layout from "@/layout/default";
+import Footer from "@/layout/footer/default";
+import Header from "@/layout/header/default";
 import { User } from "@/types";
 import { GetServerSidePropsContext } from "next";
-import { useEffect } from "react";
 
 export default function Signin({
     user
 }: {
-    user: User
+    user?: User
 }) {
-    useEffect(() => {
-        async function logout() {
-            try {
-                await api.delete('/api/auth');
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        if (user) {
-            logout();
-        }
-    }, []);
-
     return (
         <Layout
-            display="flex"
-            justifyContent="center"
-            alignItems="center">
-            <SigninForm />
+            header={<Header user={user}/>}
+            footer={<Footer />}>
+            <SigninForm user={user}/>
         </Layout>
     )
 }

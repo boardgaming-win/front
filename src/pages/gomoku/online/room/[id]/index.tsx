@@ -1,7 +1,7 @@
 import { gomoku_api } from "@/config/apiConfig";
 import { gomoku_ws } from "@/config/socketConfig";
-import whoami from "@/functions/auth/serverProps/whoami";
-import Layout from "@/layout/gomoku/online/gameRoom";
+import whoami from "@/functions/serverProps/auth/whoami";
+import Layout from "@/layout/default";
 import { Color, GameType, GomokuGameStatus, GomokuGameTurn, GomokuRule, RoomDetail, Target, User } from "@/types";
 import { Modal, Row } from "@nextui-org/react";
 import { Frame } from "@stomp/stompjs";
@@ -13,6 +13,8 @@ import { fileOf, foulMoves, makeMove, rankOf, registerWorker } from "@/functions
 import Swal from "sweetalert2";
 import GameResultForm from "@/components/gameResult/gameResultForm";
 import { boardRows } from "@/config/board";
+import Header from "@/layout/header/gameRoom";
+import Footer from "@/layout/footer/gameRoom";
 
 async function enterRoom(roomId: number, callback: (roomDetail: RoomDetail) => void) {
     try {
@@ -157,6 +159,10 @@ export default function GomokuOnlineRoom({
         rank: number,
         file: number
     ) {
+        if (!(roomDetail.gameTurn == GomokuGameTurn.BLACK && roomDetail.blackPlayer?.id == user.id) && !(roomDetail.gameTurn == GomokuGameTurn.WHITE && roomDetail.whitePlayer?.id == user.id)) {
+            return;
+        }
+
         const targetStateCopy = [...targetState];
 
         for (let r = 0; r < boardRows + 1; r++) {
@@ -208,17 +214,13 @@ export default function GomokuOnlineRoom({
             <Modal
                 open={roomDetail.gameStatus == GomokuGameStatus.END}
                 onClose={() => Router.push("/gomoku/online")}
-                width="600px">
+                width="500px">
                 <Modal.Header css={{ fontSize: "2.5vh" }}>Game Result</Modal.Header>
                 <Modal.Body>
                     <GameResultForm roomDetail={roomDetail}/>
                 </Modal.Body>
             </Modal>
-            <Layout
-                user={user}
-                roomDetail={roomDetail}
-                putPress={putPress}
-                onTurnTimeEnd={onTurnTimeEnd}>
+            <Layout header={<Header outUrl="/gomoku/online"/>} footer={<Footer user={user} roomDetail={roomDetail} putPress={putPress} onTurnTimeEnd={onTurnTimeEnd}/>}>
                 <Row justify="center">
                     <Board
                         targetClick={targetClick}

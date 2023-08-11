@@ -25,3 +25,8 @@
     align-items: center;
     color: black;
 }
+
+.avatar {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}

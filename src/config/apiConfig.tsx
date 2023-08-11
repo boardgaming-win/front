@@ -10,11 +10,6 @@ const gomoku_api = axios.create({
   withCredentials: true
 });
 
-const file_api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_FILE_BASE_URL,
-  withCredentials: true
-});
-
 api.interceptors.response.use(
   response => {
     // 정상 응답 처리
@@ -35,14 +30,4 @@ gomoku_api.interceptors.response.use(
   }
 );
 
-file_api.interceptors.response.use(
-  response => {
-    // 정상 응답 처리
-    return response;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-)
-
-export { api, gomoku_api, file_api };
+export { api, gomoku_api };

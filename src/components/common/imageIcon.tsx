@@ -2,23 +2,19 @@ import { User } from "@/types";
 import css from './imageIcon.module.css';
 import { ReactElement } from "react";
 
-function getImageSrc(src: string): string {
-    if (src.includes("http://") || src.includes("https://")) {
-        return src;
-    } else {
-        return process.env.NEXT_PUBLIC_FILE_BASE_URL + "/file/" + src;
-    }
-}
 
 export default function ImageIcon({
     user
 }: {
     user?: User
 }): ReactElement {
-    if (user?.image) {
+    if (user?.imageFileUrl) {
         return (
             <img
-                src={getImageSrc(user.image)}
+                loading="lazy"
+                crossOrigin="anonymous"
+                referrerPolicy="no-referrer"
+                src={user.imageFileUrl}
                 className={css.userImage}
                 draggable="false"/>
         );

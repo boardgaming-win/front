@@ -1,20 +1,28 @@
 import ChangePasswordForm from '@/components/auth/changePasswordForm';
-import whoami from '@/functions/auth/serverProps/whoami';
+import whoami from '@/functions/serverProps/auth/whoami';
 import Layout from "@/layout/default";
-import { User } from '@/types';
+import Footer from '@/layout/footer/default';
+import Header from '@/layout/header/default';
+import { User, UserRole } from '@/types';
 import { GetServerSidePropsContext } from 'next';
+import Router from 'next/router';
+import { useEffect } from 'react';
 
 export default function ChangePassword({
     user
 }: {
-    user: User
+    user?: User
 }) {
+    useEffect(() => {
+        if (user?.role == UserRole.GUEST) {
+            Router.push("/");
+        }
+    }, []);
+
     return (
         <Layout
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            user={user}>
+            header={<Header user={user}/>}
+            footer={<Footer />}>
             <ChangePasswordForm />
         </Layout>
     );
