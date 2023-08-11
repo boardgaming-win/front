@@ -1,0 +1,27 @@
+.link {
+    text-decoration: none;
+    color: rgba(5, 5, 5, 0.8);
+    font-size: 1.5vh;
+    white-space: nowrap;
+}
+
+.separator {
+    height: 2vh;
+    border-inline-start: 1px solid rgba(5, 5, 5, 0.2);
+}
+
+.borderBox {
+    border: 1px solid rgba(5, 5, 5, 0.8);
+    display: inline-flex;
+    box-sizing: border-box;
+    padding: 0.5vh;
+    border-radius: 6px;
+}
+
+.linkGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vh;
+    margin: 1vh;
+}

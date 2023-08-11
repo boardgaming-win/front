@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+}
+
+.content {
+    overflow-y: auto;
+    max-width: 100%;
+    aspect-ratio: 7 / 10;
+    height: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header {
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1vh;
+    box-shadow: 0 1px 0 0 #ddd;
+    justify-content: space-between;
+}
+
+.controllerbutton {
+	border: 3px solid green;
+	background-color: var(--nextui-colors-yellow600);
+	min-width: 10vh;
+	min-height: 5vh;
+	border-radius: 1vh;
+	align-items:center;
+	justify-content: center;
+	display: flex;
+	cursor: pointer;
+	box-shadow: 0 0.2vmin #999;
+}
+
+.controllerbutton:hover {
+	background-color: var(--nextui-colors-yellow700);
+}
+
+.controllerbutton:active {
+  background-color: var(--nextui-colors-yellow700);
+  box-shadow: 0 0.1vmin #666;
+  transform: translateY(0.1vmin);
+}
+
+.controllerbuttontext {
+	color: black;
+	font-size: 2.3vh;
+	font-weight: bold;
+	line-height: 100%;
+}
+
+.controller {
+    /* position: absolute; */
+    bottom: 0px;
+    background: linear-gradient(-135deg, rgb(129, 71, 0), rgb(187, 88, 1));
+    max-width: 100%;
+    width: 100%;
+    margin-top: 2vh;
+    padding: 5px;
+    box-sizing: border-box;
+}

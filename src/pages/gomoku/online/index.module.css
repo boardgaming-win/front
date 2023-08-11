@@ -1,0 +1,102 @@
+.homecard {
+    max-width: 700px;
+    min-width: 300px;
+    min-height: 100vh;
+}
+
+.roomRow {
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    min-height: 5vh;
+    cursor: pointer;
+}
+
+.roomText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-size: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+.playerDiv {
+    height: 1.5vh;
+    width: 1.5vh;
+    margin: 1vh;
+    border: 1px solid black;
+}
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: white;
+}
+
+.playerText {
+    line-height: 100%;
+}
+
+.marginTopBottom {
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+}
+
+.playerColorStoneBlack {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border: 1px solid black;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.playerColorStoneWhite {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 1px solid black;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.footerNav {
+    border-top: 1px solid #d3d3d3;
+    background-color: white;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footerNav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 0.8vh 0.8vw;
+    text-decoration: none;
+    font-size: 1vw;
+    width: 5vw;
+}
+
+.footerNav .active {
+    background-color: rgb(143, 177, 255);
+    color: black;
+}
+
+.footerNav .playerText {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.footerNav .navLinks {
+    float: right;
+}
