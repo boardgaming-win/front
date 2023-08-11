@@ -1,0 +1,10 @@
+.imageIcon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
