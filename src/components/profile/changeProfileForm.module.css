@@ -1,0 +1,20 @@
+.imageIcon {
+    position: relative;
+    left: 25%;
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

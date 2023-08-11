@@ -1,0 +1,39 @@
+.userGameInfo {
+    height: 100%;
+    width: 100%;
+}
+
+.reversed {
+    display: flex;
+    justify-content: right;
+}
+
+.imageIcon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border: 0.5vh solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.highlight {
+    border: 5px solid lightgreen;
+}
+
+.black {
+    border: 5px solid grey;
+}
+
+.white {
+    border: 5px solid #ddd;
+}
+
+.nameOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

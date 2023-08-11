@@ -1,0 +1,8 @@
+.logo {
+    height: 100%;
+    font-size: 3vh;
+    font-weight: bolder;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}

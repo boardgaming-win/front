@@ -1,0 +1,17 @@
+.putButton {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 0.5vh solid rgba(220, 220, 220);
+    cursor: pointer;
+}
+
+.putButtonInside {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 0.5vh solid rgba(170, 170, 170);
+    box-sizing: border-box;
+    background-color: rgba(120, 120, 120);
+}
