@@ -1,0 +1,11 @@
+.onlineNavButton {
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected {
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+}

@@ -10,7 +10,7 @@ export default function GomokuBoard({
     targetClick?: (rank: number, file: number) => void,
     boardRows: number,
     position: Array<Array<Color>>,
-    targetState: Array<Array<Target>>
+    targetState?: Array<Array<Target>>
 }) {
     const points = [{
         top: `50%`,
@@ -65,7 +65,7 @@ export default function GomokuBoard({
                                     [...Array(boardRows + 1)].map((_, j) => (
                                         <div className={css.square} key={i*100+j}>
                                             <div
-                                                className={`${css.target} ${css[Target[targetState[i][j]]]}`}
+                                                className={`${css.target} ${targetState && css[Target[targetState[i][j]]]}`}
                                                 onClick={() => targetClick && targetClick(i, j)} />
                                             <div className={`${css[Color[position[i][j]]]} ${css.stone} ${css.center}`} />
                                         </div>

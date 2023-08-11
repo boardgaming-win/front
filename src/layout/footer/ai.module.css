@@ -1,0 +1,39 @@
+.footer {
+    bottom: 0px;
+    background: linear-gradient(-135deg, rgb(129, 71, 0), rgb(187, 88, 1));
+    max-width: 100%;
+    width: 100%;
+    margin-top: 2vh;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.controllerbutton {
+	border: 3px solid green;
+	background-color: var(--nextui-colors-yellow600);
+	min-width: 10vh;
+	min-height: 5vh;
+	border-radius: 1vh;
+	align-items:center;
+	justify-content: center;
+	display: flex;
+	cursor: pointer;
+	box-shadow: 0 0.2vmin #999;
+}
+
+.controllerbutton:hover {
+	background-color: var(--nextui-colors-yellow700);
+}
+
+.controllerbutton:active {
+  background-color: var(--nextui-colors-yellow700);
+  box-shadow: 0 0.1vmin #666;
+  transform: translateY(0.1vmin);
+}
+
+.controllerbuttontext {
+	color: black;
+	font-size: 2.3vh;
+	font-weight: bold;
+	line-height: 100%;
+}

@@ -5,9 +5,11 @@ import { Modal, Text, Input, Grid, Row } from '@nextui-org/react';
 import { Color, Target, WinState } from '../../../types';
 import { checkAlreadyWin, thinkAndMove, registerWorker, foulMoves } from '../../../functions/gomoku/asm';
 import { useEffect } from "react";
-import Layout from "@/layout/gomoku/ai/gameRoom";
+import Layout from "@/layout/default";
 import Swal from "sweetalert2";
 import { boardRows } from "@/config/board";
+import Header from "@/layout/header/ai";
+import Footer from "@/layout/footer/ai";
 
 let moveStack: Array<Array<number>> = [];
 let playerSide: Color = Color.HIDE;
@@ -131,7 +133,6 @@ export default function GomokuAI() {
     async function requestAINewPosition(): Promise<void> {
         try{
 			let target: number[] = await thinkAndMove(moveStack, Number(timeLimit));
-
             if (target[0] < 0 || target[1] < 0) {
                 target = findEmptyTarget();   
             }
@@ -325,70 +326,68 @@ export default function GomokuAI() {
     }
 
     return (
-        <Layout
-            setSettingVisible={setSettingVisible}
-            undoClick={() => undoClick()}
-            putClick={() => putClick()}
-            resetClick={() => resetClick()}>
-            <>
-                <Modal
-                    closeButton
-                    preventClose
-                    aria-labelledby="modal-title"
-                    open={turnSettingVisible}
-                    width="788px"
-                    onClose={()=>setTurnSettingVisible(false)}>
-                    <Modal.Header>
-                        <Text id="modal-title" css={{ fontSize: "2vh" }}>
-                            Select Color
-                        </Text>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Grid.Container justify="center">
-                            <Grid xs={6}>
-                                <div className={`${css.square2x} ${css.center}`}
-                                    onClick={onSelectBlack}>
-                                    <div className={`${css.stone2x} ${css.center} ${css.black}`} />
-                                </div>
-                            </Grid>
-                            <Grid xs={6}>
-                                <div className={`${css.square2x} ${css.center}`}
-                                    onClick={onSelectWhite}>
-                                    <div className={`${css.stone2x} ${css.center} ${css.white}`} />
-                                </div>
-                            </Grid>
-                        </Grid.Container>
-                    </Modal.Body>
-                </Modal>
-                <Modal
-                    width="788px"
-                    closeButton
-                    preventClose
-                    aria-labelledby="modal-title"
-                    open={settingVisible}
-                    onClose={()=>setSettingVisible(false)}>
-                    <Modal.Header>
-                        <Text id="modal-title" css={{ fontSize: "2em" }}>
-                            Settings
-                        </Text>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Input
-                            size="xl"
-                            label="TimeLimit(s)" 
-                            type="number"
-                            initialValue={timeLimit}
-                            onChange={(e)=>setTimeLimit(e.target.value)} />
-                    </Modal.Body>
-                </Modal>
-                <Row justify="center">
-                    <Board
-                        targetClick={targetClick}
-                        boardRows={boardRows}
-                        position={positionState}
-                        targetState={targetState} />
-                </Row>
-            </>
-        </Layout>
-    )
+        <>
+            <Modal
+                closeButton
+                preventClose
+                aria-labelledby="modal-title"
+                open={turnSettingVisible}
+                width="500px"
+                onClose={()=>setTurnSettingVisible(false)}>
+                <Modal.Header>
+                    <Text id="modal-title" css={{ fontSize: "2vh" }}>
+                        Select Color
+                    </Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Grid.Container justify="center">
+                        <Grid xs={6}>
+                            <div className={`${css.square2x} ${css.center}`}
+                                onClick={onSelectBlack}>
+                                <div className={`${css.stone2x} ${css.center} ${css.black}`} />
+                            </div>
+                        </Grid>
+                        <Grid xs={6}>
+                            <div className={`${css.square2x} ${css.center}`}
+                                onClick={onSelectWhite}>
+                                <div className={`${css.stone2x} ${css.center} ${css.white}`} />
+                            </div>
+                        </Grid>
+                    </Grid.Container>
+                </Modal.Body>
+            </Modal>
+            <Modal
+                width="500px"
+                closeButton
+                preventClose
+                aria-labelledby="modal-title"
+                open={settingVisible}
+                onClose={()=>setSettingVisible(false)}>
+                <Modal.Header>
+                    <Text id="modal-title" css={{ fontSize: "2em" }}>
+                        Settings
+                    </Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Input
+                        size="xl"
+                        label="TimeLimit(s)" 
+                        type="number"
+                        initialValue={timeLimit}
+                        onChange={(e)=>setTimeLimit(e.target.value)} />
+                </Modal.Body>
+            </Modal>
+            <Layout
+                header={<Header onSettingClick={() => setSettingVisible(true)} />}
+                footer={<Footer undoClick={() => undoClick()} putClick={() => putClick()} resetClick={() => resetClick()} />}>
+                    <Row justify="center">
+                        <Board
+                            targetClick={targetClick}
+                            boardRows={boardRows}
+                            position={positionState}
+                            targetState={targetState} />
+                    </Row>
+            </Layout>
+        </>
+    );
 }

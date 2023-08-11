@@ -6,6 +6,7 @@ import { api } from "@/config/apiConfig";
 import Router from "next/router";
 import PasswordConfirmForm from "./passwordConfirmForm";
 import Swal from "sweetalert2";
+import css from './changePasswordForm.module.css';
 
 const verificationTimeout: number = 120;
 
@@ -168,43 +169,45 @@ export default function ChangePasswordForm() {
     }
 
     return (
-        <Card css={{ width: "500px", maxWidth: "90vw" }}>
-            <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
-                <Text css={{
-                    fontSize: "1.7em",
-                    fontWeight: "bold",
-                    margin: 0
-                }}>Change Password</Text>
-            </Card.Header>
-            <Card.Divider />
-            <Card.Body css={{ boxSizing: "border-box" }}>
-                <EmailVerificationForm
-                    emailInput={emailInput}
-                    sessionKey={sessionKey}
-                    emailVerificationStatus={emailVerificationStatus}
-                    setEmailVerificationStatus={setEmailVerificationStatus}
-                    onChangeEmailInput={onChangeEmailInput}
-                    emailValidityStatus={emailValidityStatus}
-                    setEmailValidityStatus={setEmailValidityStatus}
-                    emailCodeValidityStatus={emailCodeValidityStatus}
-                    setEmailCodeValidityStatus={setEmailCodeValidityStatus} />
-                <PasswordConfirmForm
-                    visible={passwordVisible}
-                    passwordInput={passwordInput}
-                    confirmPasswordInput={confirmPasswordInput}
-                    passwordValidityStatus={passwordValidityStatus}
-                    setPasswordValidityStatus={setPasswordValidityStatus} />
-            </Card.Body>
-            <Card.Divider />
-            <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
-            <Button
-                    size="lg"
-                    css={{ width: "100%", fontSize: "1.2em" }}
-                    onPress={onPress}
-                    disabled={buttonDisabled}>
-                    { getButtonText(emailVerificationStatus, verificationTimer) }
-                </Button>
-            </Card.Footer>
-        </Card>
+        <div className={css.center}>
+            <Card css={{ width: "90%", maxWidth: "500px" }}>
+                <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                    <Text css={{
+                        fontSize: "1.7em",
+                        fontWeight: "bold",
+                        margin: 0
+                    }}>Change Password</Text>
+                </Card.Header>
+                <Card.Divider />
+                <Card.Body css={{ boxSizing: "border-box" }}>
+                    <EmailVerificationForm
+                        emailInput={emailInput}
+                        sessionKey={sessionKey}
+                        emailVerificationStatus={emailVerificationStatus}
+                        setEmailVerificationStatus={setEmailVerificationStatus}
+                        onChangeEmailInput={onChangeEmailInput}
+                        emailValidityStatus={emailValidityStatus}
+                        setEmailValidityStatus={setEmailValidityStatus}
+                        emailCodeValidityStatus={emailCodeValidityStatus}
+                        setEmailCodeValidityStatus={setEmailCodeValidityStatus} />
+                    <PasswordConfirmForm
+                        visible={passwordVisible}
+                        passwordInput={passwordInput}
+                        confirmPasswordInput={confirmPasswordInput}
+                        passwordValidityStatus={passwordValidityStatus}
+                        setPasswordValidityStatus={setPasswordValidityStatus} />
+                </Card.Body>
+                <Card.Divider />
+                <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                <Button
+                        size="lg"
+                        css={{ width: "100%", fontSize: "1.2em" }}
+                        onPress={onPress}
+                        disabled={buttonDisabled}>
+                        { getButtonText(emailVerificationStatus, verificationTimer) }
+                    </Button>
+                </Card.Footer>
+            </Card>
+        </div>
     )
 };

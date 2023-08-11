@@ -1,39 +1,22 @@
 import { GomokuGameStatus, GomokuGameTurn, RoomDetail, User } from "@/types";
+import css from './gameRoom.module.css';
 import { ReactElement, useEffect, useState } from "react";
-import css from './index.module.css';
-import Logo from "@/components/common/logo";
-import UserGameInfo from "@/components/controller/userGameInfo";
 import { Col, Row } from "@nextui-org/react";
 import Timer from "@/components/controller/timer";
-import OutIcon from "@/components/icon/out";
-import Router from "next/router";
+import UserGameInfo from "@/components/controller/userGameInfo";
+import PutButton from "@/components/controller/putButton";
 
-function Header(): ReactElement {
-    return (
-        <div className={css.header}>
-            <Logo />
-            <div
-                className={css.outButton}
-                onClick={() => Router.push("/gomoku/online")}>
-                <OutIcon size="100%" />
-            </div>
-        </div>
-    );
-};
-
-function and(a: boolean, b: boolean): boolean {
-    return a && b;
-}
-
-function Footer({
+export default function Footer({
     roomDetail,
-    onTurnTimeEnd
+    putPress,
+    onTurnTimeEnd,
+    user
 }: {
     roomDetail: RoomDetail,
-    onTurnTimeEnd: () => void
+    putPress: () => void,
+    onTurnTimeEnd: () => void,
+    user: User
 }): ReactElement {
-
-
     const [turnTimeEnd, setTurnTimeEnd] = useState(0);
     const [turnTime, setTurnTime] = useState(0);
 
@@ -66,49 +49,28 @@ function Footer({
                 <Timer progress={turnTime / roomDetail.turnTime * 100}></Timer>
             </Row>
             <Row className={css.userInfo}>
-                <Col span={6} css={{ height: "100%" }}>
+                <Col span={5.1} css={{ height: "100%" }}>
                     <UserGameInfo
-                        isTurn={and(roomDetail.gameTurn == GomokuGameTurn.BLACK, roomDetail.gameStatus == GomokuGameStatus.START)}
+                        isTurn={roomDetail.gameTurn == GomokuGameTurn.BLACK && roomDetail.blackPlayer?.id == user.id && roomDetail.gameStatus == GomokuGameStatus.START}
                         user={roomDetail.blackPlayer}
                         gameUserHistory={roomDetail.blackGameUserHistory}
                         reversed={false}
                         color={GomokuGameTurn.BLACK}
-                        imageSpan={4}/>
+                        imageSpan={3}/>
                 </Col>
-                <Col span={6} css={{ height: "100%" }}>
+                <Col span={1.8} css={{ height: "100%", justifyContent: "center", display: "flex" }}>
+                    <PutButton onPress={putPress}></PutButton>
+                </Col>
+                <Col span={5.1} css={{ height: "100%" }}>
                     <UserGameInfo
-                        isTurn={and(roomDetail.gameTurn == GomokuGameTurn.WHITE, roomDetail.gameStatus == GomokuGameStatus.START)}
+                        isTurn={roomDetail.gameTurn == GomokuGameTurn.WHITE && roomDetail.whitePlayer?.id == user.id && roomDetail.gameStatus == GomokuGameStatus.START}
                         user={roomDetail.whitePlayer}
                         gameUserHistory={roomDetail.whiteGameUserHistory}
                         reversed={true}
                         color={GomokuGameTurn.WHITE}
-                        imageSpan={4}/>
+                        imageSpan={3}/>
                 </Col>
             </Row>
-        </div>
-    );
-}
-
-export default function Layout({
-    children,
-    user,
-    roomDetail,
-    onTurnTimeEnd
-}: {
-    children: ReactElement,
-    user: User,
-    roomDetail: RoomDetail,
-    onTurnTimeEnd: () => void
-}) {
-    return (
-        <div className={css.container}>
-            <Header />
-            <main className={css.content}>
-                { children }
-            </main>
-            <Footer
-                roomDetail={roomDetail}
-                onTurnTimeEnd={onTurnTimeEnd}/>
         </div>
     );
 }

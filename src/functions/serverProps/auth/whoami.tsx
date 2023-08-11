@@ -14,7 +14,7 @@ export default async function whoami(context: GetServerSidePropsContext, redirec
           id: data.id,
           email: data.email,
           name: data.name,
-          image: data.image,
+          imageFileUrl: data.imageFileUrl,
           role: data.role
         };
 
@@ -29,11 +29,12 @@ export default async function whoami(context: GetServerSidePropsContext, redirec
 
           switch (gameType) {
             case GameType.GOMOKU:
-              const { data } = await gomoku_api.get("/api/user/history", {
+              const { data } = await gomoku_api.get("/api/userHistory", {
                 headers: {
                   Cookie: context.req.headers.cookie
                 }
               });
+
               gameUserHistory = {
                 winCnt: data.winCnt,
                 loseCnt: data.loseCnt,

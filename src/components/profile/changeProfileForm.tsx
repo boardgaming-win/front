@@ -96,7 +96,7 @@ export default function ChangeProfileForm({
                     0
                 );
                 setCroppedImage(image);
-                user.image = (image && URL.createObjectURL(image)) || user.image;
+                user.imageFileUrl = (image && URL.createObjectURL(image)) || user.imageFileUrl;
                 setImageChanged(true);
             }
         } catch (e) {
@@ -169,41 +169,43 @@ export default function ChangeProfileForm({
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Card css={{ width: "500px", maxWidth: "90vw" }}>
-                <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
-                    <Text css={{
-                        fontSize: "1.7em",
-                        fontWeight: "bold",
-                        margin: 0
-                    }}>Change profile</Text>
-                </Card.Header>
-                <Card.Divider />
-                <Card.Body css={{ boxSizing: "border-box" }}>
-                    <div className={css.imageIcon} onClick={() => selectImage()}>
-                        <ImageIcon user={user}/>
-                    </div>
-                    <Text css={{ fontSize: "1.2em", margin: "8px 10px 8px 10px" }}>
-                        Name
-                    </Text>
-                    <Input
-                        id="name input"
-                        aria-label="name input"
-                        clearable
-                        initialValue={nameInput.value}
-                        onChange={(e) => nameInput.setValue(e.target.value)}
-                        type="text"
-                        size="xl"/>
-                    <Text
-                        color="error"
-                        css={{ fontSize: "1em", margin: "4px 10px 0px 10px", display: displayNameHelperText(nameValidityStatus) }}>
-                        { getNameHelperText(nameValidityStatus) }
-                    </Text>
-                </Card.Body>
-                <Card.Divider />
-                <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
-                    <Button size="lg" css={{ width: "100%", fontSize: "1.2em" }} disabled={buttonDisabled} onPress={onPress}>Change profile</Button>
-                </Card.Footer>
-            </Card>
+            <div className={css.center}>
+                <Card css={{ width: "90%", maxWidth: "500px" }}>
+                    <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                        <Text css={{
+                            fontSize: "1.7em",
+                            fontWeight: "bold",
+                            margin: 0
+                        }}>Change profile</Text>
+                    </Card.Header>
+                    <Card.Divider />
+                    <Card.Body css={{ boxSizing: "border-box" }}>
+                        <div className={css.imageIcon} onClick={() => selectImage()}>
+                            <ImageIcon user={user}/>
+                        </div>
+                        <Text css={{ fontSize: "1.2em", margin: "8px 10px 8px 10px" }}>
+                            Name
+                        </Text>
+                        <Input
+                            id="name input"
+                            aria-label="name input"
+                            clearable
+                            initialValue={nameInput.value}
+                            onChange={(e) => nameInput.setValue(e.target.value)}
+                            type="text"
+                            size="xl"/>
+                        <Text
+                            color="error"
+                            css={{ fontSize: "1em", margin: "4px 10px 0px 10px", display: displayNameHelperText(nameValidityStatus) }}>
+                            { getNameHelperText(nameValidityStatus) }
+                        </Text>
+                    </Card.Body>
+                    <Card.Divider />
+                    <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                        <Button size="lg" css={{ width: "100%", fontSize: "1.2em" }} disabled={buttonDisabled} onPress={onPress}>Change profile</Button>
+                    </Card.Footer>
+                </Card>
+            </div>
         </>
     );
 }

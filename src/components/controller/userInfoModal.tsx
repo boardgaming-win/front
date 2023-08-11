@@ -22,7 +22,7 @@ export default function UserInfoModal({
         <Modal
             aria-labelledby="modal-title"
             closeButton
-            width="788px"
+            width="500px"
             open={userInfoVisible}
             onClose={() => setUserInfoVisible(false)}>
             <Modal.Header>

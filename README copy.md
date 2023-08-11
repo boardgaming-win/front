@@ -1,1 +1,0 @@
-# boardgaming-front

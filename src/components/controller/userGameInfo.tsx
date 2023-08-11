@@ -15,7 +15,7 @@ export default function UserGameInfo({
 }: {
     user?: User,
     gameUserHistory?: GameUserHistory,
-    isTurn: boolean,
+    isTurn?: boolean,
     color?: GomokuGameTurn
     reversed: boolean
     imageSpan: number
@@ -40,7 +40,7 @@ export default function UserGameInfo({
             {
                 reversed ? 
                 <Grid.Container className={[css.userGameInfo].join(" ")}>
-                    <Grid xs={12 - imageSpan} css={{ padding: "0 2vw 0 2vw", height: "100%", fontSize: "100%", display: "flex", justifyContent: "center", flexDirection: "column" }}>
+                    <Grid xs={12 - imageSpan} css={{ padding: "0 2vw 0 2vw", fontSize: "100%", display: "flex", justifyContent: "center", flexDirection: "column" }}>
                         <Row justify="flex-end">
                             <span>
                                 { gameUserHistory ? `Rating: ${gameUserHistory.rating}` : "" }
@@ -64,7 +64,7 @@ export default function UserGameInfo({
                             <ImageIcon user={user}/>
                         </div>
                     </Grid>
-                    <Grid xs={12 - imageSpan} css={{ padding: "0 2vw 0 2vw", height: "100%", fontSize: "100%", justifyContent: "center", flexDirection: "column" }}>
+                    <Grid xs={12 - imageSpan} css={{ padding: "0 2vw 0 2vw", fontSize: "100%", justifyContent: "center", flexDirection: "column" }}>
                         <Row>
                             <span>
                                 { gameUserHistory ? `Rating: ${gameUserHistory.rating}` : "" }

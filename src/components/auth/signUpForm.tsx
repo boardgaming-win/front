@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useMemo, useState } from "react";
-import { Card, Text, Button, useInput, Loading, PressEvent } from "@nextui-org/react";
+import { Card, Text, Button, useInput, Loading } from "@nextui-org/react";
 import { api } from '@/config/apiConfig';
 import Router from "next/router";
 import { EmailCodeValidtyStatus, EmailValidityStatus, EmailVerificationStatus, NameValidityStatus, PasswordValidityStatus } from "@/types";
@@ -7,6 +7,7 @@ import EmailVerificationForm from "./emailVerificationForm";
 import NameVerificationForm from "./nameVerificationForm";
 import PasswordConfirmForm from "./passwordConfirmForm";
 import Swal from "sweetalert2";
+import css from './signUpForm.module.css';
 
 const verificationTimeout: number = 120;
 
@@ -125,7 +126,7 @@ export default function SignupForm() {
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
     
-    async function onPress(e: PressEvent) {
+    async function onPress() {
         switch (emailVerificationStatus) {
             case EmailVerificationStatus.NOT_SENT:
                 await emailVerification();
@@ -192,50 +193,52 @@ export default function SignupForm() {
     }
 
     return (
-        <Card css={{ width: "500px", maxWidth: "90vw" }}>
-            <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
-                <Text css={{
-                    fontSize: "1.7em",
-                    fontWeight: "bold",
-                    margin: 0
-                }}>Sign Up</Text>
-            </Card.Header>
-            <Card.Divider />
-            <Card.Body css={{ boxSizing: "border-box" }}>
-                <EmailVerificationForm
-                    emailInput={emailInput}
-                    sessionKey={sessionKey}
-                    emailVerificationStatus={emailVerificationStatus}
-                    setEmailVerificationStatus={setEmailVerificationStatus}
-                    onChangeEmailInput={onChangeEmailInput}
-                    emailValidityStatus={emailValidityStatus}
-                    setEmailValidityStatus={setEmailValidityStatus}
-                    emailCodeValidityStatus={emailCodeValidityStatus}
-                    setEmailCodeValidityStatus={setEmailCodeValidityStatus} />
-                <NameVerificationForm
-                    visible={nameVisible}
-                    nameInput={nameInput}
-                    nameValidityStatus={nameValidityStatus}
-                    setNameValidityStatus={setNameValidityStatus}
-                    onChangeNameInput={onChangeNameInput} />
-                <PasswordConfirmForm
-                    visible={passwordVisible}
-                    passwordInput={passwordInput}
-                    confirmPasswordInput={confirmPasswordInput}
-                    passwordValidityStatus={passwordValidityStatus}
-                    setPasswordValidityStatus={setPasswordValidityStatus} />
-            </Card.Body>
-            <Card.Divider />
-            <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
-                <Button
-                    size="lg"
-                    css={{ width: "100%", fontSize: "1.2em" }}
-                    onPress={onPress}
-                    disabled={buttonDisabled}>
-                    { getButtonText(emailVerificationStatus, verificationTimer) }
-                </Button>
-            </Card.Footer>
-        </Card>
+        <div className={css.center}>
+            <Card css={{ width: "90%", maxWidth: "500px" }}>
+                <Card.Header css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                    <Text css={{
+                        fontSize: "1.7em",
+                        fontWeight: "bold",
+                        margin: 0
+                    }}>Sign Up</Text>
+                </Card.Header>
+                <Card.Divider />
+                <Card.Body css={{ boxSizing: "border-box" }}>
+                    <EmailVerificationForm
+                        emailInput={emailInput}
+                        sessionKey={sessionKey}
+                        emailVerificationStatus={emailVerificationStatus}
+                        setEmailVerificationStatus={setEmailVerificationStatus}
+                        onChangeEmailInput={onChangeEmailInput}
+                        emailValidityStatus={emailValidityStatus}
+                        setEmailValidityStatus={setEmailValidityStatus}
+                        emailCodeValidityStatus={emailCodeValidityStatus}
+                        setEmailCodeValidityStatus={setEmailCodeValidityStatus} />
+                    <NameVerificationForm
+                        visible={nameVisible}
+                        nameInput={nameInput}
+                        nameValidityStatus={nameValidityStatus}
+                        setNameValidityStatus={setNameValidityStatus}
+                        onChangeNameInput={onChangeNameInput} />
+                    <PasswordConfirmForm
+                        visible={passwordVisible}
+                        passwordInput={passwordInput}
+                        confirmPasswordInput={confirmPasswordInput}
+                        passwordValidityStatus={passwordValidityStatus}
+                        setPasswordValidityStatus={setPasswordValidityStatus} />
+                </Card.Body>
+                <Card.Divider />
+                <Card.Footer css={{ justifyContent: "center", boxSizing: "border-box" }}>
+                    <Button
+                        size="lg"
+                        css={{ width: "100%", fontSize: "1.2em" }}
+                        onPress={() => onPress}
+                        disabled={buttonDisabled}>
+                        { getButtonText(emailVerificationStatus, verificationTimer) }
+                    </Button>
+                </Card.Footer>
+            </Card>
+        </div>
     )
 };
   
