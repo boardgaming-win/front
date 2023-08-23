@@ -232,7 +232,7 @@ export default function SignupForm() {
                     <Button
                         size="lg"
                         css={{ width: "100%", fontSize: "1.2em" }}
-                        onPress={() => onPress}
+                        onPress={onPress}
                         disabled={buttonDisabled}>
                         { getButtonText(emailVerificationStatus, verificationTimer) }
                     </Button>
